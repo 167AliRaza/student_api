@@ -23,10 +23,10 @@ db = client["students_db"]
 @app.get("/")
 def read_root():
     return {
-        "data": [],
+       "status": "success",
         "error": None,
         "message": "Welcome to the students API",
-        "status": "success"
+         "data": None
             }
 
  
@@ -39,20 +39,20 @@ def read_user(reg_no: int):
         if user is None:
             raise Exception("User not found")
         return {
+            "status": "success",
+            "error": None,
+            "message": "User read successfully",
             "data": {
                 "name": user["name"],	
                 "email": user["email"],
-                "reg_no": user["reg_no"]
-                
-},
-            "error": None,
-            "message": "User read successfully",
-            "status": "success"
+                "reg_no": user["reg_no"] },
+            
         }
     except Exception as e:
         return {
-            "data": [],
+            "status": "failed",
             "error": "Error reading user",
             "message": str(e),
-            "status": "failed"
+            "data": None
+            
         }
